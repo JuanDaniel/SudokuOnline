@@ -23,8 +23,15 @@ Funcionalidades de la aplicación
 Aspectos técnicos
 =========================
 
-Framework de desarrollo web, Symfony2.0.21
-	Bundles de terceros:
+- Framework de desarrollo web, Symfony2.0.21
+	-	Bundles de terceros:
 		- FOSJsRoutingBundle (gestionar rutas del proyecto en JavaScript)
-Framework CSS, twitter bootstrap
-jQuery v1.7.2
+- Framework CSS, twitter bootstrap
+- jQuery v1.7.2
+
+
+Desarrolladores
+========================
+- Juan Daniel Santana Rodés (jdsantana@estudiantes.uci.cu)
+- Yaniel Blanco Fernández (yblancof@estudiantes.uci.cu)
+- Adrian Sosa Benítez (asosa@estudiantes.uci.cu)

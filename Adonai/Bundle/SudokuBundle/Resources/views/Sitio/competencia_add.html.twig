@@ -1,0 +1,64 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block contenido %}
+<span class="seccion">Crear nueva competencia</span>
+<div class="new">
+  <form action="{{ path('crear_competencia') }}" class="add_match" onsubmit="return check_time()" method="post">
+  <label for="nombre">Nombre de la Competencia:</label>  
+  {{ form_widget(formulario.nombre) }}
+  <br/>
+  <fieldset>
+    <legend>Generar mapas</legend>
+    <table class="generar_m">
+      <tr>
+        <td>
+          <div class="mapas">
+            <input name="facil" type="checkbox"/>
+            <span>Fácil</span>
+          </div>			
+        </td>
+        <td>
+          <input name="cf" type="text" placeholder="No. de mapas" readonly="readonly" />
+          <input name="tf" type="text" placeholder="Tiempo (min)" readonly="readonly" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="mapas">
+            <input name="medio" type="checkbox"/>
+            <span>Medio</span>	
+          </div>
+        </td>
+        <td>
+          <input name="cm" type="text" placeholder="No. de mapas" readonly="readonly" />
+          <input name="tm" type="text" placeholder="Tiempo (min)" readonly="readonly" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div div class="mapas">
+            <input name="dificil" type="checkbox"/>
+            <span>Difícil</span>
+          </div>
+        </td>
+        <td>
+          <input name="cd" type="text" placeholder="No. de mapas" readonly="readonly" />
+          <input name="td" type="text" placeholder="Tiempo (min)" readonly="readonly" />
+        </td>
+      </tr>
+    </table>  
+  </fieldset>
+  <br/>
+  <input class="btn" type="submit" value="Agregar" />
+  {{ form_rest(formulario) }}
+</form>
+<span class="time_total">Tiempo estimado: <span id="time">0</span> min</span>
+</div>
+<div class="clearfix"></div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/sudoku/js/jquery.numeric.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/sudoku/js/competencia.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block contenido %}
+<span class="seccion">Listado de competencias</span>  
+{% include 'SudokuBundle:Sitio:mensajes.html.twig' %}
+<table class="competencia">
+    <tr>
+      <td class="encabezado">#</td>
+      <td class="encabezado">Nombre</td>
+      <td class="encabezado">Estado</td>
+      <td class="encabezado">Fecha</td>
+      <td class="encabezado">Tiempo total</td>
+      <td class="encabezado">Acciones</td>
+    </tr>
+    {% for competencia in competencias %}
+      <tr>
+        <td class="numero">{{ loop.index }}</td>
+        <td class="nombre">{% if (competencia.estado == 0 or competencia.estado == 1) and inscrito(competencia, usuario) %}<a href="{{ path('competencia', {'id': competencia.id}) }}">{{ competencia.nombre }}</a>{% else %}{{ competencia.nombre }}{% endif %}</td>
+        <td><img alt="estado" src="{{ asset('bundles/sudoku/images/usados/') }}{% if competencia.estado == 0  %}no_iniciada.png{% elseif competencia.estado == 1 %}iniciada.png {% else %}premiada.png{% endif %}" title="{% if competencia.estado == 0  %}No iniciada{% elseif competencia.estado == 1 %}Iniciada{% else %}Finalizada{% endif %}" {% if competencia.estado == 1 %}id="blink"{% endif %} /></td>
+        <td>{{ competencia.fecha | date('Y-m-d') }}</td>
+        <td>{{ competencia.tiempo }} min</td>
+        <td>    
+          {# Opciones disponibles al usuario #}
+          {% if competencia.estado == 0 or competencia.estado == 1 %}<a href="{{ path('competencia_inscribirse', {'id': competencia.id}) }}"><img alt="acceder" src="{{ asset('bundles/sudoku/images/usados/concursar.png') }}" title="Concursar" /></a>
+          {%else%}<img alt="acceder" src="{{ asset('bundles/sudoku/images/usados/no_concursar.png') }}" title="No concursar" />{% endif %}
+          <a href="{{ path('ranking', {'id': competencia.id}) }}"><img src="{{ asset('bundles/sudoku/images/usados/chart_bar.png') }}" alt="rank" title="Ver Ranking" /></a>
+          
+          {# Opciones disponibles al admin #}
+          {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('competencia_usuarios', {'id': competencia.id}) }}" title="Concursantes de la competencia"><img src="{{ asset('bundles/sudoku/images/usados/mostrar_user.png') }}" /></a>
+          {% if competencia.estado == 0 %}<a href="{{ path('competencia_cambiar_estado', {'id': competencia.id, 'estado': 'iniciar'}) }}"><img alt="acceder" src="{{ asset('bundles/sudoku/images/usados/iniciar.png') }}" title="Iniciar" /></a>
+          {%elseif competencia.estado ==1 %}<a href="{{ path('competencia_cambiar_estado', {'id': competencia.id, 'estado': 'detener'}) }}"><img alt="acceder" src="{{ asset('bundles/sudoku/images/usados/detener.png') }}" title="Detener" /></a>
+          {% else %}<a href="{{ path('competencia', {'id': competencia.id}) }}"><img alt="acceder" src="{{ asset('bundles/sudoku/images/usados/guardar.png') }}" title="En registro" /></a>{% endif %}
+          <a href="{{ path('eliminar_competencia', {'id': competencia.id}) }}"><img title="Eliminar" alt="eliminar" src="{{ asset('bundles/sudoku/images/usados/borrar.png') }}" /></a>
+          {% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">No existen competencias creadas</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

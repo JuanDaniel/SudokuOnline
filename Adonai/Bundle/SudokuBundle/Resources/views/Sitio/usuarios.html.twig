@@ -1,0 +1,33 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block contenido %}
+<span class="seccion">Concursantes de la competencia</span>
+{% include 'SudokuBundle:Sitio:mensajes.html.twig' %}
+<table class="competencia">
+    <tr>
+      <td class="encabezado">#</td>
+      <td class="encabezado">Nombre</td>
+      <td class="encabezado">Apellidos</td>
+      <td class="encabezado">Usuario</td>
+      <td class="encabezado">Rol</td>
+      <td class="encabezado">Acciones</td>
+    </tr>
+    {% for usuario in usuarios %}
+      <tr>
+        <td class="numero">{{ loop.index }}</td>
+        <td class="nombre">{{ usuario.nombre }}</td>
+        <td>{{ usuario.apellidos }}</td>
+        <td>{{ usuario.usuario }}</td>
+        <td>{{ usuario.rol }}</td>
+        <td>
+          <a href="{{ path('eliminar_usuario', {'id': usuario.id}) }}"><img src="{{ asset('bundles/sudoku/images/usados/borrar.png') }}" title="Eliminar" /></a> 
+          <a href="{{ path('editar_usuario', {'id': usuario.id}) }}"><img src="{{ asset('bundles/sudoku/images/usados/modificar.png') }}" title="Editar" /></a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6">No existen usuarios</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

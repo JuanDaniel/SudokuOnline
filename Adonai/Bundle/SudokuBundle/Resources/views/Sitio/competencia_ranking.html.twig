@@ -1,0 +1,35 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% if competencia.estado == 1 %}
+  {% block head %}
+    {{ parent() }}
+    <meta http-equiv="Refresh" content="30" />
+  {% endblock %}
+{% endif %}
+
+{% block contenido %}
+<span class="seccion">Ranking de la competencia</span>    
+<table class="ranking">
+    <tr>
+      <td class="encabezado pos">Posición</td>
+      <td class="encabezado">Nombre y Apellidos</td>
+      <td class="encabezado">Aceptados</td>
+      <!--<td class="encabezado">Puntos</td>-->
+      <td class="encabezado">Tiempo total</td>
+    </tr>
+    {% for rank in ranking %}
+      <tr>
+        <td class="numero">{% if loop.index ==1%}<img alt="estado" src="{{ asset('bundles/sudoku/images/usados/oro.png')}}"/>{%elseif loop.index ==2%}<img alt="estado" src="{{ asset('bundles/sudoku/images/usados/plata.png')}}"/>{%elseif loop.index == 3%}<img alt="estado" src="{{ asset('bundles/sudoku/images/usados/bronce.png')}}"/>{%else%}{{ loop.index }}{%endif%}</td>
+        <td>{{ rank['usuario'] }}</td>
+        <td>{{ rank['aceptados'] }}</td>
+        <!--<td>{#{ rank['puntos'] }#}</td>-->
+        <td>{{ rank['tiempo'] | date('%H:%I:%S') }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">No se han efectuado envíos</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

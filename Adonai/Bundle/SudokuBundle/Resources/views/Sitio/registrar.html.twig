@@ -1,0 +1,32 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block contenido %}
+<span class="seccion">Registrar usuario</span>
+<br/>
+<form action="{{ path('registrar_usuario') }}" class="add_user" method="post">
+  <div>		
+    <label for="nombre">Nombre de concursante:</label>
+    {{ form_errors(formulario.nombre) }}
+    {{ form_widget(formulario.nombre) }}
+  </div>
+  <div>	
+    <label for="nombre">Apellidos del concursante:</label>
+    {{ form_errors(formulario.apellidos) }}
+    {{ form_widget(formulario.apellidos) }} 
+  </div>	
+  <div>	
+    <label for="nombre">Usuario:</label>  
+    {{ form_errors(formulario.usuario) }}
+    {{ form_widget(formulario.usuario) }} 
+  </div>	
+  <div>
+    {{ form_widget(formulario.password) }} 
+  </div>	
+  <br />
+  <div class="subm">
+    <input class="btn" type="submit" value="Agregar" />
+  </div>
+  {{ form_rest(formulario) }}
+</form>
+<div class="clearfix"></div>
+{% endblock %}

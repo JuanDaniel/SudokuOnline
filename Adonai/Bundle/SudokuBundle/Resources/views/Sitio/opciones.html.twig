@@ -1,0 +1,11 @@
+<div class="menu">
+  <ul class="nav">
+    <li class="header"><span>Opciones</span></li>
+    {% if is_granted('ROLE_ADMIN') %}
+    <li><a href="{{ path('crear_competencia') }}"><img src="{{ asset('bundles/sudoku/images/usados/registrar_competencia.png') }}"/>Crear competencia</a></li>
+    <li><a href="{{ path('usuarios') }}"><img src="{{ asset('bundles/sudoku/images/usados/team.png') }}"/>Mostrar usuarios</a></li>     
+    {% endif %}
+    <li><a href="{{ path('competencias') }}"><img src="{{ asset('bundles/sudoku/images/usados/mostar_competencia.png') }}"/>Mostrar competencias</a></li>
+    <!--<li><a href="{{ path('ranking_general')}}"><img src="{{ asset('bundles/sudoku/images/usados/chart_bar.png') }}"/>Ver ranking general</a></li>--> 
+  </ul> 
+</div>

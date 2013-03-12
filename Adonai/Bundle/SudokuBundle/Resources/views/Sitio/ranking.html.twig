@@ -1,0 +1,27 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block contenido %}
+<span class="seccion">Ranking general</span>
+{% include 'SudokuBundle:Sitio:mensajes.html.twig' %}
+<table class="ranking">
+    <tr>
+      <td class="encabezado pos">Posicion</td>
+      <td class="encabezado">Nombre y Apellidos</td>
+      <td class="encabezado">Tiempo total</td>
+      <td class="encabezado">Puntos</td>
+    </tr>
+    {% for competencia in competencias %}
+      <tr>
+        <td class="numero">{% if loop.index ==1%}<img alt="estado" src="{{ asset('bundles/sudoku/images/usados/oro.png')}}"/>{%elseif loop.index ==2%}<img alt="estado" src="{{ asset('bundles/sudoku/images/usados/plata.png')}}"/>{%elseif loop.index == 3%}<img alt="estado" src="{{ asset('bundles/sudoku/images/usados/bronce.png')}}"/>{%else%}{{ loop.index }}{%endif%}</td>
+        <td class="nombre">{% if competencia.estado == 0 or competencia.estado == 1 %}<a href="{{ path('competencia', {'id': competencia.id}) }}">{{ competencia.nombre }}</a>{% else %}{{ competencia.nombre }}{% endif %}</td>
+        <td><img alt="estado" src="{{ asset('bundles/sudoku/images/usados/') }}{% if competencia.estado == 0  %}no_iniciada.png{% elseif competencia.estado == 1 %}iniciada.png {% else %}premiada.png{% endif %}" title="{% if competencia.estado == 0  %}No iniciada{% elseif competencia.estado == 1 %}Iniciada{% else %}Finalizada{% endif %}" /></td>
+        <td>{{ competencia.fecha | date('Y-m-d') }}</td>        
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">No existen competencias creadas</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

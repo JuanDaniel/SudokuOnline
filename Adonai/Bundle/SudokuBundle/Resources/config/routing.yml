@@ -1,0 +1,90 @@
+main:
+  pattern:  /
+  defaults: { _controller: SudokuBundle:Sitio:main }
+
+
+#Usuario
+registrar_usuario:
+  pattern: /registrar/
+  defaults: { _controller: SudokuBundle:Usuario:registrar}
+  
+eliminar_usuario:
+  pattern: /acceso/admin/usuario/{id}/eliminar/
+  defaults: { _controller: SudokuBundle:Usuario:remove }
+
+editar_usuario:
+  pattern: /acceso/admin/usuario/{id}/editar/
+  defaults: { _controller: SudokuBundle:Usuario:edit }
+
+usuarios:
+  pattern: /acceso/admin/usuarios/
+  defaults: { _controller: SudokuBundle:Usuario:list }
+ 
+  
+#Competencia
+crear_competencia:
+  pattern: /acceso/admin/competencia/add/
+  defaults: { _controller: SudokuBundle:Competencia:add }  
+  
+eliminar_competencia:
+  pattern: /acceso/admin/competencia/{id}/eliminar/
+  defaults: { _controller: SudokuBundle:Competencia:remove }  
+
+competencias:
+  pattern: /acceso/competencias/
+  defaults: { _controller: SudokuBundle:Competencia:list }
+  
+competencia_inscribirse:
+  pattern: /acceso/competencia/{id}/inscribirse/
+  defaults: { _controller: SudokuBundle:Competencia:inscribirse }
+  
+competencia_usuarios:
+  pattern: /acceso/competencia/{id}/usuarios/
+  defaults: { _controller: SudokuBundle:Competencia:usuarios }
+  
+competencia_cambiar_estado:
+  pattern: /acceso/admin/competencia/{id}/{estado}/
+  defaults: { _controller: SudokuBundle:Competencia:cambiarEstado }
+  
+competencia_usuario_baja:
+  pattern: /acceso/admin/competencia/{id}/usuario/baja/{idUsuario}
+  defaults: { _controller: SudokuBundle:Competencia:bajaUsuario }
+  
+competencia:
+  pattern: /acceso/competencia/{id}/
+  defaults: { _controller: SudokuBundle:Competencia:competencia }
+  options:
+    expose: true
+  
+calificar:
+  pattern: /acceso/calificar/{id}/
+  defaults: { _controller: SudokuBundle:Competencia:calificar }
+  options:
+    _method: POST
+    expose: true
+  
+envios:
+  pattern: /acceso/envios/{id}/
+  defaults: { _controller: SudokuBundle:Competencia:envios }
+
+
+#Ranking
+ranking:
+  pattern: /acceso/ranking/{id}/
+  defaults: { _controller: SudokuBundle:Ranking:competencia }
+  
+ranking_general:
+  pattern: /acceso/ranking/
+  defaults: { _controller: SudokuBundle:Ranking:all }
+ 
+ 
+#Acceso
+login:
+  pattern: /acceso/login/
+  defaults: { _controller: SudokuBundle:Sitio:login }
+  
+login_check:
+  pattern: /login_check/
+  
+logout:
+  pattern: /logout/

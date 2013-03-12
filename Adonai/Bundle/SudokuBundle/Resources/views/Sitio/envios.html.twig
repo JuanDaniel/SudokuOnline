@@ -1,0 +1,24 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block contenido %}
+  
+<table class="competencia">
+  <thead>
+    <th class="encabezado">#</th>
+    <th class="encabezado">Puntos</th>
+    <th class="encabezado">Porciento</th>
+    <th class="encabezado">Fecha</th>
+  </thead>
+  <tbody>
+    {% for envio in envios %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ envio.puntos }}</td>
+        <td>{{ envio.puntos * 100 }}%</td>
+        <td>{{ envio.fecha | date('Y-m-d') }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

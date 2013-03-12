@@ -1,0 +1,67 @@
+#mapa p {
+  font-family:'Comic Sans MS',cursive;
+  font-size:36px;
+  color:#333;
+  white-space:nowrap;
+  margin-bottom:40px;
+  position:relative;
+  left:3px;
+}
+#mapa a {
+  color:#333;
+  font-weight:bold;
+  text-decoration:none;
+}
+#mapa table {
+  background-color:#fff;
+  height:500px;
+  width:500px;
+  border-collapse:collapse;
+  margin-top:10px;
+  margin-left:20%;
+  border-top: 3px solid #ddc;
+  border-left: 3px solid #ddc;
+}
+#mapa td {
+  width:50px;
+  height:50px;
+  border:1px solid #ddc;
+}
+#mapa input {
+  font-family:'Comic Sans MS',cursive;
+  font-size:17pt;
+  font-weight:bold;color:#333;
+  border:0px;
+  padding:0px;
+  margin:0 !important;
+  text-align:center;
+  width:50px;
+  height:100%;
+}
+
+.crono{
+  margin-left:32%;
+  font-size:25px;
+  padding:5px;
+  margin-top:5px;
+}
+
+#mapa{
+   padding-top: 10px;
+}
+
+#cronometro {
+   margin-top: 10px;
+}
+
+#mapa #rt {
+  border-right:3px solid #ddc;
+}
+
+#mapa #row{
+  border-bottom: 3px solid #ddc;
+}
+
+b{
+  color:red;
+}

@@ -1,0 +1,81 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('bundles/sudoku/css/mapa.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block info %}
+<div class="menu menu-info">
+  <ul class="nav">
+    <li class="header"><span>Información competencia</span></li>
+    <li><img src="{{ asset('bundles/sudoku/images/usados/cantidad.png') }}"/>Cantidad de mapas: <strong>{{ competencia.mapas | length }}</strong></li>
+      <ul class="cat">
+        {% set info = info_competencia(competencia.mapas) %}
+        <li><img src="{{ asset('bundles/sudoku/images/usados/facil.png') }}"/>Categoria fácil: <strong>{{ info['facil'] }}</strong></li>
+        <li><img src="{{ asset('bundles/sudoku/images/usados/medio.png') }}"/>Categoria medio: <strong>{{ info['medio'] }}</strong></li>
+        <li><img src="{{ asset('bundles/sudoku/images/usados/dificil.png') }}"/>Categoria difícil: <strong>{{ info['dificil'] }}</strong></li>
+      </ul>    
+      <li><img src="{{ asset('bundles/sudoku/images/usados/reloj.png') }}"/>Tiempo total de competencia: <strong>{{ competencia.tiempo }} min</strong></li>    
+  </ul> 
+</div>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div id="cronometro">
+  <span class='crono' id="cntdwn"></span>
+</div>
+<div id="mapa">
+  <table>
+    {% for row in mapa %}
+    <tr {% if loop.index is divisibleby(3) %}id="row"{% endif %}>
+      {% for col in row %}
+        <td {% if loop.index is divisibleby(3) %}id="rt"{% endif %}>
+          {% if col %}
+          <input type="text" value="{{ col }}" readonly="" name="map[]" />
+          {% else %}
+            {% if user_solution[loop.parent.loop.index0][loop.index0] %}
+            <input type="text" autocomplete="off" maxlength="1" class="complete" name="map[]" value="{{ user_solution[loop.parent.loop.index0][loop.index0] }}" />
+            {% else %}
+            <input type="text" autocomplete="off" maxlength="1" class="complete" name="map[]" />
+            {% endif %}
+          {% endif %}
+        </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<div id="op">
+  <span><a href="javascript:calificar({{ competencia.id }})" class="btn btn-success">Calificar</a></span>
+</div>
+
+{% endblock %}
+
+
+{% block javascript %}
+  {{ parent() }}
+  <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/sudoku/js/jquery.numeric.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/sudoku/js/sudoku.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('input[class="complete"]').numeric({decimal: false, negative: false});
+    });
+  </script>
+  <script type="text/javascript">
+    TargetDate = "{{ tiempo(competencia.tiempo, competencia.fechaIniciada) | date('m/d/Y g:i:s A') }}";
+    BackColor = "white";
+    ForeColor = "red";
+    CountActive = true;
+    CountStepper = -1;
+    LeadingZero = true;
+    DisplayFormat = "%%M%% Minutos, %%S%% Segundos";
+    FinishMessage = "<strong>Tiempo agotado</strong>";
+    Path = "{{ path('ranking', {'id': competencia.id}) }}";
+  </script>
+  <script src="{{ asset('bundles/sudoku/js/countdown.js') }}" type="text/javascript"></script>
+{% endblock %}

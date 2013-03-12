@@ -1,0 +1,38 @@
+<div class="menu">
+  <ul class="nav">
+  {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %} 
+  <li class="header"><span>Menú de usuario</span></li>  
+  {% else %}
+    <li class="header"><span>Acceso</span></li>
+  {%endif%}                                  
+  </ul> 
+    {% if error %}
+      <div class="error"><p>{{ error.message }}</p></div>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}    
+      <span><a href="{{ path('logout') }}"><img src="{{ asset('bundles/sudoku/images/usados/salir.png') }}" title="Salir"/></a></span>      
+      <span><strong>{{ app.user.nombre }}</strong></span>
+    {% else %}
+    <form class="form-horizontal" id="login" action="{{ path('login_check') }}" method="post">
+      <div class="control-group">
+        <div>
+          <input class="input-medium" type="text" id="inputEmail" placeholder="Usuario" name="_username" />
+        </div>
+      </div>
+      <div class="control-group">                                    
+        <div>
+          <input class="input-medium" type="password" id="inputPassword" placeholder="Clave" name="_password" />
+        </div>
+      </div>
+      <div class="control-group">
+        <div>
+          <input type="submit" class="btn" value="Acceder" />
+        </div>
+      </div>
+    </form>
+    <div>
+		<img src="{{asset('bundles/sudoku/images/usados/nuevo_user.png')}}"/>
+		<a href="{{ path('registrar_usuario') }}">Registrar nuevo usuario</a>
+    </div>
+  {% endif %}
+</div>

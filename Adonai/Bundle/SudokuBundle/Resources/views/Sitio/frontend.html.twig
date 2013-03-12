@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Sudoku -- Online{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/sudoku/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('bundles/sudoku/css/bootstrap-responsive.css') }}" rel="stylesheet">
+<link href="{{ asset('bundles/sudoku/css/docs.css') }}" rel="stylesheet">
+<link href="{{ asset('bundles/sudoku/css/bootstrap-sudoku.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<!-- Subhead
+      ================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <span class="titulo">GRAN CONCURSO DE SUDOKU</span>
+
+  </div>
+</header>
+
+<div class="container contenedor">
+
+  <!-- Docs nav
+  ================================================== -->
+  <div class="row">     
+    <div class="span9">
+      <div class="tablero">
+              {% block contenido %}{% endblock %}
+        </div>
+      </div>   
+
+      <div class="span3">
+        <div class="area-menu">
+                {% block menu %}
+                  {% block login %}
+                    {% include 'SudokuBundle:Sitio:cajalogin.html.twig' with {'error': false} %}
+                  {% endblock %}
+                  {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+                  {% include 'SudokuBundle:Sitio:opciones.html.twig' with {'id': app.user.id} %}
+                  {% block info%}{% endblock %}
+                  {% endif %}
+            <!--<div class="menu">
+                <ul class="nav">
+                    <li class="header">Equipos en linea</li>
+                    <li><a href="#"><img src="{{ asset('bundles/sudoku/images/team.png') }}"/>Los misticos</a></li>
+                    <li><a href="#"><img src="{{ asset('bundles/sudoku/images/team.png') }}"/>Los crazys</a></li>
+                    <li><a href="#"><img src="{{ asset('bundles/sudoku/images/team.png') }}"/>Los pillos</a></li>
+                </ul> 
+            </div>-->
+                 {% endblock %}
+          </div>
+        </div>  
+      </div>
+
+      <!-- Footer
+      ================================================== -->
+      <footer class="footer">
+        <div class="container">
+          <span>Equipo de Desarrollo: Juan D. Santana Rodés, Adrian Sosa Benítez & Yaniel Blanco Fernández</span>                 
+        </div>
+      </footer>
+{% endblock %}
+
+{% block javascript %}
+      <script src="{{ asset('bundles/sudoku/js/jquery.js') }}"></script>
+      <script src="{{ asset('bundles/sudoku/js/function.js') }}"></script>
+{% endblock %}

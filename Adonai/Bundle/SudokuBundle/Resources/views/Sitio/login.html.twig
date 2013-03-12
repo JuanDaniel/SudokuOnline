@@ -1,0 +1,41 @@
+{% extends 'SudokuBundle:Sitio:frontend.html.twig' %}
+
+{% block body %}
+<!-- Subhead
+      ================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <span class="titulo">GRAN CONCURSO DE SUDOKU</span>
+
+  </div>
+</header>
+
+<div class="container contenedor">
+
+  <!-- Docs nav
+  ================================================== -->
+  <div class="row">     
+    <div class="span12">
+      <div class="tablero">
+        <div class="redirect-login">
+          <span class='error_redir'>Autenticación requerida</span>
+          <form action="{{ path('login_check') }}" method="post">     
+            <label>Usuario</label>
+            <input type='text' placeholder="Usuario" name="_username"/>
+            <label>Contraseña</label>
+            <input type="password" placeholder="Clave" name="_password"/>
+            <br/>
+            <input type='submit' class="btn" value="Acceder"/>		    			
+          </form>  
+        </div>
+      </div>
+    </div>      
+  </div>
+  <!-- Footer
+  ================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <span>Equipo de Desarrollo: Juan D. Santana Rodés, Adrian Sosa Benítez & Yaniel Blanco Fernández</span>                 
+    </div>
+  </footer>
+{% endblock %}
